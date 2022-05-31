@@ -1,0 +1,12 @@
+version: "3.6" 
+services:
+   piholegravity:
+    image: 6cfc9558ed88
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/debian/docker/bash/script2.sh:/script.sh:ro
+      - /home/debian/docker/pihole/etc-pihole:/workdir
+    command: bash /script.sh
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
