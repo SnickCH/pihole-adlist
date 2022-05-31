@@ -1,4 +1,3 @@
-#This script is in work. don't use it at this moment.
 #!/bin/bash   
 #This script downloads automatically the newest PI-hole tracking list (from a provided URL) and updates gravity
 
@@ -7,10 +6,13 @@
 #Add the URL you want to use for download
 URL1="https://raw.githubusercontent.com/SnickCH/pihole-adlist/main/addlist2.txt"
 
+#Containername (if you like to update gravity, delete the comment infront of the variable)
+GRAVITY=yes
+CONTAINERN=pihole
 #Dont change anything that starts from here
 
 #The file that should be safed. You should have mounted the coresponding directory into your container
-FILE=/workdir/addlist.list
+FILE=/workdir/adlists.list
 #A lot of temporary variables that will be used inside the container
 TMPLST1=tmpaddlist1.list
 #TMPLST2=tmpaddlist2.list
@@ -40,3 +42,6 @@ else
 	#create the file
 	cp $TMPLST1 $FILE
 fi
+
+#Update gravity (at the moment without the check if "yes" is set or not)
+docker exec $CONTAINERN pihole updateGravity
